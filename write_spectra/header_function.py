@@ -3,12 +3,33 @@ from astropy.time import Time
 from datetime import date
 import astropy.io.fits as fits
 import numpy as np
+from astropy.table import Table
+import astropy.units as u
+
+def create_NIR_table(wavelength, flux, error):
+    #add docststrings
+    NIR_table = Table([wavelength, flux, error],
+           names=('wavelength', 'flux', 'error'))
+    NIR_table['wavelength'].unit = u.um
+
+    return NIR_table
+
+def create_MIRI_table(wavelength, flux, error):
+    #add docststrings
+    MIRI_table = Table([wavelength, flux, error],
+           names=('wavelength', 'flux', 'error'))
+    MIRI_table['wavelength'].unit = u.um
+
+    return MIRI_table
+
+
+
 
 def compile_header(wavelength_data, **spectra_data_info):
-"""Creates a header from a dictionary of values. """
+    """Creates a header from a dictionary of values. """
 
-    spectrum_info_all['history1'] = ascii(f'Original file: {file}')
-    spectrum_info_all['history2'] = spectrum_info_all['generated_history']
+    history1 = None #ascii(f'Original file: {file}')
+    history2 = spectra_data_info['generated_history']
 
     header = fits.Header()
     header.set('EXTNAME', 'PRIMARY', 'name of this extension')
@@ -146,12 +167,12 @@ def compile_header(wavelength_data, **spectra_data_info):
         comment = None
 
     try:
-        header.set('HISTORY', spectra_data_info['history1'])
+        header.set('HISTORY', history1)
     except KeyError:
         pass
 
     try:
-        header.set('HISTORY', spectra_data_info['history2'])
+        header.set('HISTORY', history2)
     except KeyError:
         pass
 
