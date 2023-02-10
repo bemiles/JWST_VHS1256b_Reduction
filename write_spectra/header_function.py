@@ -3,32 +3,11 @@ from astropy.time import Time
 from datetime import date
 import astropy.io.fits as fits
 import numpy as np
-from astropy.table import Table
-import astropy.units as u
-
-def create_NIR_table(wavelength, flux, error):
-    #add docststrings
-    NIR_table = Table([wavelength, flux, error],
-           names=('wavelength', 'flux', 'error'))
-    NIR_table['wavelength'].unit = u.um
-
-    return NIR_table
-
-def create_MIRI_table(wavelength, flux, error):
-    #add docststrings
-    MIRI_table = Table([wavelength, flux, error],
-           names=('wavelength', 'flux', 'error'))
-    MIRI_table['wavelength'].unit = u.um
-
-    return MIRI_table
-
-
-
 
 def compile_header(wavelength_data, **spectra_data_info):
     """Creates a header from a dictionary of values. """
 
-    history1 = None #ascii(f'Original file: {file}')
+    history1 = None
     history2 = spectra_data_info['generated_history']
 
     header = fits.Header()
