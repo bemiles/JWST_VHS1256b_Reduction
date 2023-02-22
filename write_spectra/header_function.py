@@ -7,8 +7,10 @@ import numpy as np
 def compile_header(wavelength_data, **spectra_data_info):
     """Creates a header from a dictionary of values. """
 
-    history1 = None
-    history2 = spectra_data_info['generated_history']
+    history = spectra_data_info['generated_history']
+
+    comment = 'To read this file in with specutils use Spectrum1D.read() with format = \'tabular-fits\''
+
 
     header = fits.Header()
     header.set('EXTNAME', 'PRIMARY', 'name of this extension')
@@ -140,20 +142,15 @@ def compile_header(wavelength_data, **spectra_data_info):
 
 
     try:
-        comment = spectra_data_info['spectrum_comments']
         header.set('COMMENT', comment)
     except KeyError:
         comment = None
 
     try:
-        header.set('HISTORY', history1)
+        header.set('HISTORY', history)
     except KeyError:
         pass
 
-    try:
-        header.set('HISTORY', history2)
-    except KeyError:
-        pass
 
     header.set('DATE', date.today().strftime("%Y-%m-%d"), 'Date of file creation')
 

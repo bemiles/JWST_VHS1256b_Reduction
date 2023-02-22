@@ -10,11 +10,10 @@ fits_data_dir = '/Users/jolie/PycharmProjects/JWST_VHS1256b_Reduction/write_spec
 #Header information about both NIRSpec and MIRI Spectra
 JWST_header_dict = {
     'RA': '194.007637',
-    'Dec': '-12.957692',
+    'dec': '-12.957692',
     'generated_history': 'Data Reduced by JWST pipeline version 1.7.2, CRDS version 11.16.12, CRDS context jwst_0977.pmap',
     'object_name' : 'VHS1256b',
-    'telescope': 'JWST',
-    'comment': None
+    'telescope': 'JWST'
      }
 
 
